@@ -15,7 +15,7 @@ const {
 const AuthorType = new GraphQLObjectType({
   name: "Author",
   fields: () => ({
-    id: { type: GraphQLID },
+    _id: { type: GraphQLID },
     name: { type: GraphQLString },
     age: { type: GraphQLInt },
     books: {
@@ -34,7 +34,7 @@ const AuthorType = new GraphQLObjectType({
 const BookType = new GraphQLObjectType({
   name: "Book",
   fields: () => ({
-    id: { type: GraphQLID },
+    _id: { type: GraphQLID },
     title: { type: GraphQLString },
     genre: { type: GraphQLString },
     rating: { type: GraphQLFloat },

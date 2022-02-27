@@ -1,7 +1,7 @@
 const express = require("express");
 const graphqlHTTP = require("express-graphql");
 const mongoose = require("mongoose");
-const schema = require("./schema/schema");
+const schema = require("./schema");
 
 mongoose
   .connect(
@@ -9,6 +9,7 @@ mongoose
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,
+      connectTimeoutMS: 10000,
     }
   )
   .then((args) => {

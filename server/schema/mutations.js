@@ -1,6 +1,7 @@
 const graphql = require("graphql");
 const Books = require("../models/bookSchama");
 const Authors = require("../models/authorSchema");
+const booksController = require("../controllers/booksController");
 const { AuthorType, BookType } = require("./types");
 
 const {
@@ -14,10 +15,10 @@ const {
 } = graphql;
 
 const Mutations = new GraphQLObjectType({
-  name: "Mutations",
+  name: "Mutations", // This name appear in Graphiql documentation
   fields: {
     addAuthor: {
-      type: AuthorType,
+      type: AuthorType, // This is return type
       args: {
         name: { type: GraphQLString },
         age: { type: GraphQLInt },
@@ -37,10 +38,10 @@ const Mutations = new GraphQLObjectType({
         genre: { type: GraphQLString },
         authorId: { type: GraphQLID },
       },
-      resolve: (parent, args) => {
-        const book = new Books(args);
-        book.save();
-        return book;
+      resolve: async (parent, args) => {
+        const response = await booksController.addBook(args);
+        console.log("Response: ", response);
+        return response;
       },
     },
   },
