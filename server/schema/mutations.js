@@ -52,6 +52,7 @@ const Mutations = new GraphQLObjectType({
         lastName: { type: GraphQLString },
         email: { type: GraphQLString },
         phoneNumber: { type: GraphQLString },
+        branchIds: { type: new GraphQLList(GraphQLString) },
       },
       resolve: (parent, args) => {
         return new Promise(async (resolve, reject) => {
@@ -61,9 +62,20 @@ const Mutations = new GraphQLObjectType({
             reject(new Error("User already exixt"));
           } else {
             const response = await userController.signupUser(args);
-            console.log("User Added: ", response);
-            resolve({ name: response.firstName, email: response.email });
+            resolve(response);
           }
+        });
+      },
+    },
+    issueToken: {
+      type: UserType,
+      args: {
+        email: { type: GraphQLString },
+      },
+      resolve: (parent, args) => {
+        return new Promise(async (resolve, reject) => {
+          const user = await userController.issueToken(args);
+          resolve(user);
         });
       },
     },

@@ -49,10 +49,23 @@ const BookType = new GraphQLObjectType({
 });
 
 const UserType = new GraphQLObjectType({
-  name: "Test",
+  name: "User",
   fields: () => ({
     firstName: { type: GraphQLString },
+    lastName: { type: GraphQLString },
     email: { type: GraphQLString },
+    phoneNumber: { type: GraphQLString },
+    createdAt: { type: GraphQLString },
+    branchIds: { type: new GraphQLList(GraphQLString) },
+    status: { type: GraphQLString },
+    userRole: { type: GraphQLString },
+    lastLogin: { type: GraphQLString },
+    address: { type: GraphQLString },
+    country: { type: GraphQLString },
+    state: { type: GraphQLString },
+    city: { type: GraphQLString },
+    zipCode: { type: GraphQLString },
+    timeZone: { type: GraphQLString },
   }),
 });
 

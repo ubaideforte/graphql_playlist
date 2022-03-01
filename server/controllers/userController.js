@@ -1,5 +1,5 @@
 const userModel = require("../models/userModel");
-const jwtToken = require("jsonwebtoken");
+const JWT = require("jsonwebtoken");
 
 const userController = {
   signupUser: (args) => {
@@ -21,7 +21,7 @@ const userController = {
   },
   issueToken: (userData) => {
     return new Promise((resolve, reject) => {
-      const newToken = jwtToken.sign(
+      const newToken = JWT.sign(
         { id: userData._id, email: userData.email, roleId: userData.userRole },
         "process.env.jwt_token"
       );
