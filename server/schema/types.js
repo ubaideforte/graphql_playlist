@@ -48,4 +48,12 @@ const BookType = new GraphQLObjectType({
   }),
 });
 
-module.exports = { AuthorType, BookType };
+const UserType = new GraphQLObjectType({
+  name: "Test",
+  fields: () => ({
+    firstName: { type: GraphQLString },
+    email: { type: GraphQLString },
+  }),
+});
+
+module.exports = { AuthorType, BookType, UserType };

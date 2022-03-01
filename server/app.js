@@ -3,15 +3,12 @@ const graphqlHTTP = require("express-graphql");
 const mongoose = require("mongoose");
 const schema = require("./schema");
 
+// mongodb+srv://mongodb-university:p3lvckgr@sandbox.ajavt.mongodb.net/graphql-playlist
 mongoose
-  .connect(
-    `mongodb+srv://mongodb-university:p3lvckgr@sandbox.ajavt.mongodb.net/graphql-playlist`,
-    {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      connectTimeoutMS: 10000,
-    }
-  )
+  .connect(`mongodb://localhost:27017/mis`, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
   .then((args) => {
     console.log("Database Connection Successful!");
   })

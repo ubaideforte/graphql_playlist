@@ -30,7 +30,7 @@ const userSchema = new mongoose.Schema(
       },
     ],
     isRegistered: { type: Boolean, default: false },
-    status: { type: Number, default: 1 }, // 1=active, 2=deactive
+    status: { type: Number, default: 1 }, // 1=active, 2=inactive
     userRole: { type: Number, default: 1 }, // 1=admin, 3=sub-admin
     lastLogin: { type: Date, default: "" },
     phoneNo: { type: String, default: "" },

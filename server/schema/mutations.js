@@ -2,7 +2,8 @@ const graphql = require("graphql");
 const Books = require("../models/bookSchama");
 const Authors = require("../models/authorSchema");
 const booksController = require("../controllers/booksController");
-const { AuthorType, BookType } = require("./types");
+const userController = require("../controllers/userController");
+const { AuthorType, BookType, UserType } = require("./types");
 
 const {
   GraphQLObjectType,
@@ -42,6 +43,28 @@ const Mutations = new GraphQLObjectType({
         const response = await booksController.addBook(args);
         console.log("Response: ", response);
         return response;
+      },
+    },
+    signupUser: {
+      type: UserType,
+      args: {
+        firstName: { type: GraphQLString },
+        lastName: { type: GraphQLString },
+        email: { type: GraphQLString },
+        phoneNumber: { type: GraphQLString },
+      },
+      resolve: (parent, args) => {
+        return new Promise(async (resolve, reject) => {
+          const { isUserExist } = await userController.isUserExist(args);
+
+          if (isUserExist) {
+            reject(new Error("User already exixt"));
+          } else {
+            const response = await userController.signupUser(args);
+            console.log("User Added: ", response);
+            resolve({ name: response.firstName, email: response.email });
+          }
+        });
       },
     },
   },
